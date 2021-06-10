@@ -7,6 +7,8 @@ Simple py Script to Automatically marks the anime episodes as Filler or not.
 ![alt text](https://i.imgur.com/d6kQ7RJ.png)
 
 * Results
+
+
 ![alt text](https://i.imgur.com/TB2mllQ.png)
 
 
