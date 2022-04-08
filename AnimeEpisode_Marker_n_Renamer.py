@@ -1,6 +1,6 @@
 ########################################################################################################################
 
-LastEp = 891
+LastEp = 892
 loc = "//NAS/.Anime$/One Piece/Episodes/9.Yonko Saga"
 showname = "One Piece"
 url = "https://www.animefillerlist.com/shows/one-piece"
