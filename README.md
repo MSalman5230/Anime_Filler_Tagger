@@ -1,10 +1,15 @@
 # Anime_Filler_Marker
-Simple py Script to Automatically marks the anime episodes as Filler or not.
+Simple py Script to Automatically tag an anime episode as Filler or not.
 
 * Uses www.animefillerlist.com for Episodes metadata.
 
-* Requires these inputs.
-![alt text](https://i.imgur.com/d6kQ7RJ.png)
+* Change the .py to configure
+'''python
+LastEp = 892
+loc = "//NAS/.Anime$/One Piece/Episodes/9.Yonko Saga"
+showname = "One Piece"
+url = "https://www.animefillerlist.com/shows/one-piece"
+'''
 
 * Results
 
