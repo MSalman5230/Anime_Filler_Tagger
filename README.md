@@ -1,4 +1,4 @@
-# Anime_Filler_Marker
+# Anime_Filler_Tagger
 Simple py Script to Automatically tag an anime episode as Filler or not.
 
 * Uses www.animefillerlist.com for Episodes metadata.
