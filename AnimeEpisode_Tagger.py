@@ -1,10 +1,12 @@
-#######################################################################################################################
 
-LastEp = 892
-loc = "//NAS/.Anime$/One Piece/Episodes/9.Yonko Saga"
-showname = "One Piece"
-url = "https://www.animefillerlist.com/shows/one-piece"
+########################################################################################################################
 
+LastEp=891
+#loc = "//NAS/.Anime$/One Piece/Episodes/9.Yonko Saga"
+loc = r"\\SERVO\anime\One Piece\Episodes\OP NEW"
+showname = 'One Piece'
+url= 'https://www.animefillerlist.com/shows/one-piece'
+default_quality=" [720p]"
 #######################################################################################################################
 
 import requests
@@ -14,8 +16,6 @@ import time
 from bs4 import BeautifulSoup
 
 animeinfo = []
-
-# Defing Funtion to get info about the Series Episode and add it to 'animeinfo' array
 def get_info():
 
     source_code = requests.get(url).text
@@ -31,28 +31,43 @@ def get_info():
         animeinfo.append([epno, type])
 
 
-# Funtion to ShowList 'animeinfo'
 def showlist():
     print(animeinfo)
 
+def get_quality(name):
+    print("CHECKING",'720p' in name)
+    if '480p' in name:
+        return " [480p]"
+    elif '720p' in name:
+        return " [720p]"
+    elif '1080p' in name:
+        return " [1080p]"
+    else:
+        return default_quality
 
 ########################################################################################################################
-# Running the Get_Info() funtion
+print("Started")
 get_info()
 # showlist()
 
-# Just Print Showname for identifier
 print(showname)
-
-# Serching every episode in the location
 files = os.listdir(loc)
 for name in files:
     if ".mkv" in name:
         ep = ""
         flag = 0
         for i in range(len(name)):
+            
+            if (name[i].isdigit() and name[i + 1].isdigit() and name[i + 2].isdigit() and name[i + 3].isdigit()) and (name[i + 4] == " " or name[i + 4] == "_" or name[i + 4] == "."):  # For Format ***
+                # print(name)
+                ep = name[i]
+                ep = ep + name[i + 1]
+                ep = ep + name[i + 2]
+                ep = ep + name[i + 3]
+                flag = 1
+                break
 
-            # Storing Episode number in ep variable ,3 if statment as number can of of * ,** ,*** order
+
             if (name[i].isdigit() and name[i + 1].isdigit() and name[i + 2].isdigit()) and (name[i + 3] == " " or name[i + 3] == "_" or name[i + 3] == "."):  # For Format ***
                 # print(name)
                 ep = name[i]
@@ -81,9 +96,8 @@ for name in files:
             EpType = ""
             if EPint <= len(animeinfo):
                 # print(EPint)
-                EpType = animeinfo[EPint - 1][1]  # Assigning Episode type to Eptype variable ie filler or not
+                EpType = animeinfo[EPint - 1][1]
 
-            # Just changing the wring format of Eptype ie from 'Filler' to '[Filler]'
             print(EPint, " - ", EpType)
             if EpType == "Filler":
                 EpType = " [Filler]"
@@ -91,10 +105,12 @@ for name in files:
                 EpType = " [Mostly Filler]"
             else:
                 EpType = ""
-        # Setting up path of the file to start the rename process
+
         if flag == 1 and EPint > LastEp:
+            print(name)
+            quality=get_quality(name)
             oldname = loc + "/" + name
-            newname = loc + "/" + showname + " - " + ep + " [720p]" + EpType + ".mkv"
+            newname = loc + "/" + showname + " - " + ep + quality + EpType + ".mkv"
 
             # print(oldname)
             try:
@@ -103,5 +119,5 @@ for name in files:
                 print(ep + " - ERROR")
             else:
                 print(ep + " - Renamed")
-print("Closing in 5 Sec")
-time.sleep(5)
+print("Closing in 10 Sec")
+time.sleep(10)
